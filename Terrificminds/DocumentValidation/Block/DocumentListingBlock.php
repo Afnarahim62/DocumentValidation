@@ -81,6 +81,4 @@ class DocumentListingBlock extends Template
         $DocumentsAdded = $this->document->getDocumentByOrder($entityId);
         return $DocumentsAdded;
     }
-
-    
 }

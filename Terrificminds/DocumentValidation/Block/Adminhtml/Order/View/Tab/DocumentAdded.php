@@ -42,6 +42,7 @@ class DocumentAdded extends \Magento\Backend\Block\Template implements \Magento\
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
         $this->document = $document;
+
     }
 
     /**

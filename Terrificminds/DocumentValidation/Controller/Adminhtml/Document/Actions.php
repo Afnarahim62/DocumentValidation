@@ -10,9 +10,16 @@ use Magento\Sales\Model\OrderRepository;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\CreditmemoSender;
 use Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader;
+use Terrificminds\DocumentValidation\Helper\Data;
+
+// use Terrificminds\DocumentValidation\Model\Mail\TransportBuilder;
 
 class Actions extends \Magento\Backend\App\Action
 {
+    protected $helperdatamail;
+
+
+
     /**
      * Salesorder variable
      *
@@ -89,7 +96,9 @@ class Actions extends \Magento\Backend\App\Action
         OrderRepository $orderRepository,
         Order $salesOrder,
         CreditmemoSender $creditmemoSender,
-        CreditmemoLoader $creditmemoLoader
+        CreditmemoLoader $creditmemoLoader,
+        Data $helperdatamail
+
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->coreRegistry = $registry;
@@ -101,6 +110,9 @@ class Actions extends \Magento\Backend\App\Action
         $this->salesOrder = $salesOrder;
         $this->creditmemoSender = $creditmemoSender;
         $this->creditmemoLoader = $creditmemoLoader;
+
+        $this->helperdatamail = $helperdatamail;
+
     }
 
     /**
@@ -114,17 +126,18 @@ class Actions extends \Magento\Backend\App\Action
            $logger = new \Zend_Log();
            $logger->addWriter($writer);
            $logger->info("/////////////////-----logger initiated-----//////////////////////");
-
+           $logger->info("1 " . print_r("helooo", true));
 
         $result = $this->getRequest()->getPostValue();
-        // if( mail ('afnarahim99@gmail.com', "Test Postfix", "Test mail from postfix")) {
-        //     $logger->info("Aloowed extension " . print_r("mail send", true));
-        // } else {
-        //     $logger->info("Aloowed extension " . print_r("mai not send", true));
-        // }
+        if($this->helperdatamail->sendMail()) {
+            $logger->info("Aloowed extension " . print_r("mail send", true));
+        } else {
+            $logger->info("Aloowed extension " . print_r("mai not send", true));
+        }
+        $logger->info("2 " . print_r("helooo", true));
         $attachments = $this->documentCollection
-        ->addFieldToFilter('order_id', $result['orderid'])
-        ->addFieldToFilter('is_verified', ['is' => new \Zend_Db_Expr('null')]);
+            ->addFieldToFilter('order_id', $result['orderid'])
+            ->addFieldToFilter('is_verified', ['is' => new \Zend_Db_Expr('null')]);
         $id = $result['id_start'];
         foreach ($attachments as $attachment) {
             try {
@@ -242,4 +255,7 @@ class Actions extends \Magento\Backend\App\Action
         }
         $this->_redirect('adminhtml/*/');
     }
+
+    
+
 }

@@ -117,7 +117,12 @@ class SaveToTable
     public function saveAttachment($request)
     {
         try {
-           
+            $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+           $logger = new \Zend_Log();
+           $logger->addWriter($writer);
+           $logger->info("/////////////////-----logger initiated-----//////////////////////");
+           $logger->info("file upload " . print_r("helooo", true));
+
 
             $uploadData = $request->getFiles()->get('order-attachment')[0];
             $result = $this->uploadModel->uploadFileAndGetInfo($uploadData);
@@ -136,10 +141,16 @@ class SaveToTable
                     $quote = $this->checkoutSession->getQuote();
                     $attachment->setQuoteId($quote->getId());
                 } 
+                $logger->info("file upload " . print_r($result['name'], true));
+                $logger->info("file upload " . print_r($result['url'], true));
+                $logger->info("file upload " . print_r($date, true));
+                $logger->info("file upload " . print_r($quote->getId(), true));
+
              $attachment->save();
+             $logger->info("file upload " . print_r("save in step2", true));
              $url = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "document/" . $attachment->getPath();
-             $result["quote_id"] = $attachment->getOrderId();
-             $result["order_id"] = $attachment->getQuoteId();
+             $result["quote_id"] = $attachment->getQuoteId();
+             $result["order_id"] = $attachment->getOrderId();
              $result['url'] = $url;
              $result["uploaded_at"] = $attachment->getCreatedAt();
              $result["modified_at"] = $attachment->getUpdatedAt();
@@ -152,6 +163,7 @@ class SaveToTable
                 'errorcode' => $e->getCode()
             ];
         }
+        $logger->info("file upload " . print_r($result, true));
         return $result;
     }
 }

@@ -4,7 +4,7 @@
     <table name="document_verification">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" comment=" Id" identity="true"/>
         <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="true" comment="order id"/>
-        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="true" comment="order id"/>
+        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="true" comment="quote id"/>
         <column xsi:type="varchar" name="file_name" nullable="true" length="255" comment="file name"/>
         <column xsi:type="varchar" name="file_path" nullable="true" length="255" comment="file path"/>
         <column xsi:type="varchar" name="is_verified" nullable="true" comment="set verification true or false"/>
@@ -15,7 +15,7 @@
             <column name="id"/>
         </constraint>
         <constraint xsi:type="foreign" referenceId="DOUCUMENTVERIFICATION_ID_SALESORDER_ENTITYID"
-                    table="document_verification" column="id" referenceTable="sales_order" referenceColumn="entity_id"
+                    table="document_verification" column="order_id" referenceTable="sales_order" referenceColumn="entity_id"
                     onDelete="CASCADE"/>
    </table>
     <table name = "check_category_verification">

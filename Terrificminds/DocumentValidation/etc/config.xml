@@ -10,7 +10,18 @@
                 <multiple_file_upload>0</multiple_file_upload>
                 <allowed_customer_group>0,1,2,3</allowed_customer_group>
                 <max_file_size>kb</max_file_size>
+
+
+                <enabled45>1</enabled45>
+                <sender>general</sender>
+                <email_template>terrificminds_general_email_template</email_template>
+
+
+
             </general>
         </terrificminds>
+
+
+
     </default>
 </config>
