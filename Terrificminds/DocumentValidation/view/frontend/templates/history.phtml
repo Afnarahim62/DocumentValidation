@@ -1,0 +1,11 @@
+<?php
+    /* @var $block \Magento\Sales\Block\Order\History\Container */
+?>
+
+ <td data-th="<?= $block->escapeHtml(__('Document Added')) ?>" class="col created- 
+ date">
+    <?php
+        $order = $block->getOrder();
+    ?>
+    <?= $block->escapeHtml((($order['document_added'] == "yes") ? "yes" : "No")) ?>
+ </td>

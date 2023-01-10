@@ -1,0 +1,16 @@
+<?xml version = "1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <terrificminds>
+            <general>
+                <enable>1</enable>
+                <document_location>pubmedia</document_location> 
+                <allowed_file_extension>1,2</allowed_file_extension>
+                <multiple_file_upload>0</multiple_file_upload>
+                <allowed_customer_group>0,1,2,3</allowed_customer_group>
+                <max_file_size>kb</max_file_size>
+            </general>
+        </terrificminds>
+    </default>
+</config>

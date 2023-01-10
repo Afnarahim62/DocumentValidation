@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var Terrificminds\DocumentValidation\Block\DocumentListingBlock $block
+ **/
+?>
+<div class="payment-option-title field choice" data-role="title">
+    <h2 class="test-shipment action action-toggle"  role="heading" aria-level="2" >Documents Added</h2><hr>
+</div>
+<p>
+    <?php
+            $var = $block->getDocumentList();
+            $length = sizeof($var);
+    for ($i = 0; $i < $length; $i++) {
+        ?>
+         <a href=<?=$var[$i]['file_path']?> target="_blank"><?=$var[$i]['file_name']?></a><br>
+        <?php
+    }
+    ?>
+</p>

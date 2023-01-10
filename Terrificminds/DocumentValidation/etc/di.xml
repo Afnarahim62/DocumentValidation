@@ -1,0 +1,10 @@
+<?xml version = "1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Terrificminds\DocumentValidation\Api\Data\DocumentInterface"
+                type="Terrificminds\DocumentValidation\Model\Document" />
+    <preference for="Terrificminds\DocumentValidation\Api\DocumentRepositoryInterface"
+                type="Terrificminds\DocumentValidation\Model\DocumentRepository" />
+    <preference for="Terrificminds\DocumentValidation\Api\Data\DocumentSearchResultInterface"
+                type="Terrificminds\DocumentValidation\Model\DocumentSearchList"/>
+</config>

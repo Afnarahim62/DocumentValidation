@@ -1,0 +1,49 @@
+<?xml version = "1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+   <system>
+      <tab id="terrificminds" translate="label" sortOrder="200">
+         <label>Terrificminds</label>
+      </tab>
+      <section id="terrificminds" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+         <class>separator-top</class>
+         <label>Document Validation</label>
+         <tab>terrificminds</tab>
+         <resource>Terrificminds_DocumentValidation::configuration</resource>
+         <group id="general" translate="label" type="text" sortOrder="10"
+                showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>General Configuration</label>
+            <field id="enable" translate="label" type="select" sortOrder="1"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Enable Module</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="allowed_file_extension" translate="label" type="multiselect" sortOrder="40"
+                   showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Allowed File Extention</label>
+                    <source_model>Terrificminds\DocumentValidation\Model\Config\MultiselectFileExtention</source_model>
+            </field>
+            <field id="multiple_file_upload" translate="label" type="select" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Multiple File Upload</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="allowed_customer_group" translate="label comment" type="multiselect" sortOrder="41"
+                   showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Allowed Customer Group</label>
+                    <source_model>Terrificminds\DocumentValidation\Model\Config\CustomerGroup</source_model>
+            </field> 
+             <field id="allowed_categories" translate="label comment" type="multiselect" sortOrder="42"
+                    showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Allowed Categories</label>
+                    <source_model>Terrificminds\DocumentValidation\Model\Config\MultiselectCategories</source_model>
+            </field>
+            <field id="max_file_size" translate="label" type="text" sortOrder="1"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+               <label>Maximum File Size</label>
+               <comment>the maximum file size in kb</comment>
+            </field>
+         </group>
+      </section>
+   </system>
+</config>

@@ -1,0 +1,94 @@
+<?php
+/**
+ * @var $block \Terrificminds\DocumentValidation\Block\Adminhtml\Order\View\Tab\DocumentAdded
+ */
+$display = $block->isHidden();
+if ($display == '0') {
+    $document = [];
+    ?>
+<div class="fieldset-wrapper order-information">
+    <div class="fieldset-wrapper-title">
+       <span class="title"><?= $block->escapeHtml(__(('Document Added to the Order')))?></span>
+    </div>
+    <?php
+
+        $collection = $block->getDocumentList();
+    ?>
+    <form id="contact-form" class="form-horizontal" method="post" 
+          enctype="multipart/form-data" 
+          action="<?= $block->escapeHtml(__($block->getUrl("terrificminds/document/actions")))?>">
+       
+        <table  id="test-data-table" class="admin__table-secondary">
+            <thead>
+                <tr>
+                    <th scope="col" class="col content">File Name</th>
+                    <th scope="col" class="col created_at">Created At</th>
+                    <th scope="col" class="col actions">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($collection as $key => $data): ?>
+                    <tr>
+                        <td data-th="Content" class="col content">
+                            <a href=<?=$block->escapeHtml(__($data['file_path']))?> target="_blank" >
+                                <?=$block->escapeHtml(__($data['file_name']))?>
+                            </a>
+                        </td>
+                        <td data-th="Date" class="col created_at">
+                            <?= $block->escapeHtml(__($data['created_at'])) ?></td>
+                        <td>
+                        <select name="<?=$block->escapeHtml(__($data['id']))?>" id="document" 
+                            class="Terrificminds\DocumentValidation\Controller\Document\Actions" >
+                            <option value="accept" <?php if ($data['is_verified'] == 'accept') { echo "selected";}?>>
+                                Accept
+                            </option>
+                            <option value="reject" <?php if ($data['is_verified'] == 'reject') { echo "selected";}?>>
+                                Reject
+                            </option>
+                        </select>
+                    </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table><br><br>
+        
+
+        <?= $block->getChildHtml('form.additional.info') ?>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <input type="hidden" name="id_start" id="id_start" 
+                       value ="<?=$block->escapeHtml(__($collection['0']['id']))?>">
+                <input type="hidden" name="orderid" id="orderid" 
+                       value="<?=$block->escapeHtml(__($collection['0']['order_id']))?>">
+                <input type="hidden" name="hideit" id="hideit" value="" />
+                <button type="submit" id="add" title="" class="action submit primary">
+                    <span><?= $block->escapeHtml(__('Save')) ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+    <?php
+}
+?>
+<script>
+    require(['jquery'],function($){
+        $(document).ready(function(){
+            $("#add").click(function(){
+            var customurl = "<?= $block->escapeHtml(__($block->getUrl("terrificminds/document/actions"))) ?>";
+            $.ajax({
+                url: customurl,
+                type: "POST",
+                data: $(this).closest('form').serialize(),
+                dataType: "json",
+                success: function(result){
+                    console.log(result);
+                    location.reload(); 
+                }
+            });
+            $('#contact-form')[0].reset(); 
+            return false;
+            });
+        });
+    }); 
+</script>

@@ -1,0 +1,30 @@
+{
+    "document_verification": {
+        "column": {
+            "id": true,
+            "entity_id": true,
+            "file_name": true,
+            "is_verified": true,
+            "message": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "DOCUMENT_VERIFICATION_ID_SALES_ORDER_ENTITY_ID": true
+        }
+    },
+    "check_category_verification": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "category_id": true,
+            "is_verified": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
